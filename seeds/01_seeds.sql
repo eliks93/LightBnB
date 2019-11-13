@@ -20,9 +20,9 @@ INSERT INTO properties (
   post_code,
   active
   )
-VALUES(1, "Eli's awesome home!", 'description', 'thumbURL', 'coverURL', 200, 2, 1, 2, 'USA', 'Palatine', 'Seattle', 'WA', '98133', TRUE),
-(2, "Sam's lame home!", 'description', 'thumbURL', 'coverURL', 1000, 1, 1, 1, 'Canada', 'Oak', 'Vancouver', 'BC', 'V6H 1N2', TRUE),
-(2, "Sam's DOPE House", 'description', 'thumbURL', 'coverURL', 2500, 3, 4, 6, 'Canada', 'Timber', 'Whislter', 'BC', 'V6Z 5M3', TRUE);
+VALUES(1, 'Eli awesome home!', 'description', 'thumbURL', 'coverURL', 200, 2, 1, 2, 'USA', 'Palatine', 'Seattle', 'WA', '98133', TRUE),
+(2, 'Sam lame home!', 'description', 'thumbURL', 'coverURL', 1000, 1, 1, 1, 'Canada', 'Oak', 'Vancouver', 'BC', 'V6H 1N2', TRUE),
+(2, 'Sams DOPE House', 'description', 'thumbURL', 'coverURL', 2500, 3, 4, 6, 'Canada', 'Timber', 'Whislter', 'BC', 'V6Z 5M3', TRUE);
 
 
 INSERT INTO reservations (guest_id, property_id, start_date, end_date) 
@@ -37,6 +37,6 @@ INSERT INTO property_reviews (
   rating,
   message
   )
-VALUES(3, 3, 3, 9, 'message'),
-(1, 2, 1, 2, 'message'),
-(2, 1, 2, 7.5, 'message');
+VALUES(1, 2, 1, 2, 'message'),
+(2, 1, 2, 9, 'message'),
+(3, 3, 3, 7.5, 'message');
