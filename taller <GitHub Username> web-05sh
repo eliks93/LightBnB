@@ -1,0 +1,5 @@
+  id  | owner_id |    title    |     description     | thumbnail_photo_url | cover_photo_url | cost_per_night | parking_spaces | number_of_bathrooms | number_of_bedrooms | country | street |  city   | province | post_code | active 
+------+----------+-------------+---------------------+---------------------+-----------------+----------------+----------------+---------------------+--------------------+---------+--------+---------+----------+-----------+--------
+ 1013 |        1 | New listing | bal;kgl;fagdl;ksfl; | thumURL             | coverUrl        |           1000 |              1 |                  11 |                  2 | US      | Oak St | Austing | TX       | 90210     | t
+(1 row)
+

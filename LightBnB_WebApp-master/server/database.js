@@ -1,14 +1,6 @@
 const properties = require('./json/properties.json');
 const users = require('./json/users.json');
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  user: 'vagrant',
-  password: '123',
-  host: 'localhost',
-  database: 'lightbnb'
-});
-
+const db = require('./db/index');
 /// Users
 
 /**
@@ -17,7 +9,7 @@ const pool = new Pool({
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithEmail = function(email) {
-  return pool.query(`
+  return db.query(`
   SELECT * FROM users
   WHERE email = $1
   `, [email])
@@ -38,7 +30,7 @@ exports.getUserWithEmail = getUserWithEmail;
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = function(id) {
-  return pool.query(`
+  return db.query(`
   SELECT * FROM users
   WHERE id = $1
   `, [id])
@@ -59,7 +51,7 @@ exports.getUserWithId = getUserWithId;
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser =  function(user) {
-  return pool
+  return db
   .query(`
   INSERT INTO users (name, email, password)
   VALUES(
@@ -83,7 +75,7 @@ exports.addUser = addUser;
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function(guest_id, limit = 10) {
-  return pool.query(`
+  return db.query(`
   SELECT properties.*,  reservations.*, avg(property_reviews.rating)
   FROM properties
   JOIN reservations ON properties.id = property_id
@@ -133,8 +125,8 @@ const getAllProperties = function(options, limit = 10) {
     if(queryParams.length > 0) {
       andOrWhere = 'AND'
     }
-    queryParams.push(`%${options.owner_id}%`);
-    queryString += `${andOrWhere} owner_id LIKE $${queryParams.length} `;
+    queryParams.push(options.owner_id);
+    queryString += `${andOrWhere} owner_id = $${queryParams.length} `;
   }
 
   queryString += `GROUP BY properties.id `
@@ -155,7 +147,7 @@ const getAllProperties = function(options, limit = 10) {
   LIMIT $${queryParams.length};
   `;
 
-  return pool.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
   .then(res => {
     return res.rows;
   })
@@ -171,7 +163,7 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function(property) {
-  return pool
+  return db
   .query(`
   INSERT INTO properties (
     owner_id,
